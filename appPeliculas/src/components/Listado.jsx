@@ -14,13 +14,13 @@ function Listado() {
 
     //pedimos el token
 
-    let token = localStorage.getItem('token')
+    let token = sessionStorage.getItem('token')
 
     //Protejo la ruta Login , si no hay token redirijo al Login    
 
     useEffect(()=>{
 
-        if(!token){navigate('/')}
+        if(token === null){navigate('/')}
 
     },[token,navigate])
 
@@ -69,7 +69,8 @@ function Listado() {
                                     <div className="card-body">
                                         <h5 className="card-title">{movie.title.substring(0,30)+ "..."}</h5>
                                         <p className="card-text">{movie.overview.substring(0,100) + "..."}</p>
-                                        <Link to="#" className="btn btn-primary">View Detail</Link>
+                                        {/*Mostramos el id en la URL */}
+                                        <Link to={`/detalle?MovieID=${movie.id}`} className="btn btn-primary">View Detail</Link>
                                     </div>
                                 </div>
 

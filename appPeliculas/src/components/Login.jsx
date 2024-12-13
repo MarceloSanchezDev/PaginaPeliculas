@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate  } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 function Login() {
-    const [token, setToken] = useState(localStorage.getItem('token'))
+    const [token, setToken] = useState(sessionStorage.getItem('token'))
     //Navigate para navegar entre rutas
     const navigate = useNavigate()
     //Protejo la ruta Login , si hay token redirijo al Listado
@@ -28,7 +28,7 @@ function Login() {
                 title: 'Error, los campos no pueden estas vacios!',
                 text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis aperiam vitae at totam fugit dolorem ipsa,',
                 icon: 'error',
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             })           
             return
         }
@@ -38,33 +38,35 @@ function Login() {
                 title: 'Error!',
                 text: 'debes escribir una direccion de correo valido',
                 icon: 'error',
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             }) 
             return
         }
 
         if (email !== "challenge@alkemy.org" && password !== "react") {
-            swAlert(
-                <div>
-                    <h2>Credenciales Invalidas</h2>
-                </div>
-            )
+            swal.fire({
+                title: 'Error!',
+                text: 'Credenciales Invalidas',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            }) 
             return
         }
         //Axios Post para mandar las credenciales a la API
         axios.post('http://challenge-react.alkemy.org',{email,password})
             .then(res => {
+                //lo guardamos en el sessionStorage
+                sessionStorage.setItem('token', res.data.token);
+                //guardamos el token que recibimos
+                setToken(res.data.token)
+                console.log(res.data.token)
                 //Si resulta exitoso mandamos alerta
                 swal.fire({
                     title: 'Succes!',
                     text: 'Perfecto, estas dentro',
                     icon: 'success',
-                    confirmButtonText: 'Cool'
+                    confirmButtonText: 'Ok'
                 })
-                //guardamos el token que recibimos
-                setToken( res.data.token)
-                //lo guardamos en el localStorage
-                localStorage.setItem('token', token);
                 //redireccionamos 
                 navigate('/listado')
             })

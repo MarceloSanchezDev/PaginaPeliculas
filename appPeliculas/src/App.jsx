@@ -5,6 +5,7 @@ import Login from "./components/Login"
 import Listado from './components/Listado'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Detalle from './components/Detalle'
 //styles
 import './css/bootstrap.min.css'
 
@@ -18,6 +19,7 @@ function App() {
         {/*Route es la ruta donde se renderiza el componente */}
         <Route exact path='/' Component={Login}/>
         <Route path='/listado' Component={Listado}/>
+        <Route path='/detalle' Component={Detalle}/>
       </Routes>
       <Footer/>
     </div>
