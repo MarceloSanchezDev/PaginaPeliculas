@@ -24,7 +24,7 @@ function Resultados() {
             .then(res =>{
                 setResultadoPeliculas(res.data.results)
                 console.log(res.data)  
-                if(res.data.results){
+                if(res.data.results.length == 0){
                     Swal.fire({
                         title: 'Error!',
                         text: 'Tu busqueda no tuvo resultados',
