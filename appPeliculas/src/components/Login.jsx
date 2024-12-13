@@ -1,20 +1,19 @@
+//Librerias
 import axios from 'axios'
 import swAlert from '@sweetalert/with-react';
 import { useNavigate  } from 'react-router-dom';
 function Login() {
-
+    //Navigate para navegar entre rutas
     const navigate = useNavigate()
-
-    console.log(navigate)
-    
+    //Manejamos el evento del formulario
     const submitHandler = (e)=>{
         e.preventDefault()
         //guardamos los inputs values
         const email = e.target.email.value
         const password = e.target.password.value
-        
+        //Regex para validar el Email
         const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        
+        //Validaciones
         if(email === "" || password === ""){
             swAlert(
                 <div>
@@ -43,12 +42,16 @@ function Login() {
             return
         }
 
-        console.log("Credenciales Validas")
+        //Axios Post para mandar las credenciales a la API
         axios.post('http://challenge-react.alkemy.org',{email,password})
             .then(res => {
+                //Si resulta exitoso mandamos alerta
                 swAlert(<h2>Perfecto, estas dentro</h2>)
+                //guardamos el token que recibimos
                 const tokenRecibido = res.data.token
+                //lo guardamos en el localStorage
                 localStorage.setItem('token', tokenRecibido);
+                //redireccionamos 
                 navigate('/listado')
             })
     }
