@@ -1,14 +1,14 @@
 function Footer() {
     return(
-        <footer>
+        <footer className="fixed-bottom">
             <nav>
             <ul className="nav justify-content-center">
                     <li className="nav-item">
-                        <a className="nav-link" href="https://instragram.com">Instagram</a>
+                        <a className="nav-link" href="https://github.com/MarceloSanchezDev/PaginaPeliculas">Git Hub</a>
                     </li>
             </ul>
             </nav>
-            <p>Copytight Marcelo Sanchez</p>
+            <p className="d-flex mx-auto">Copytight Marcelo Sanchez</p>
         </footer>
     )
 

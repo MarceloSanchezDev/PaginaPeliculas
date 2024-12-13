@@ -28,7 +28,7 @@ function Detalle() {
                 text: 'Error de conexion',
                 icon: 'error',
                 confirmButtonText: 'Ok'
-            }))
+            }),[])
             //
         console.log(movieID)
         },[movieID,apikey])

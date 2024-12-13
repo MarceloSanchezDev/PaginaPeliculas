@@ -6,6 +6,7 @@ import Listado from './components/Listado'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Detalle from './components/Detalle'
+import Resultados from './components/Resultados'
 //styles
 import './css/bootstrap.min.css'
 
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/' Component={Login}/>
         <Route path='/listado' Component={Listado}/>
         <Route path='/detalle' Component={Detalle}/>
+        <Route path='/resultados' Component={Resultados}/>
       </Routes>
       <Footer/>
     </div>
