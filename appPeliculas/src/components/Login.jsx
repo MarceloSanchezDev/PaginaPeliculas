@@ -1,6 +1,6 @@
 //Librerias
+import swal from 'sweetalert2'
 import axios from 'axios'
-import swAlert from '@sweetalert/with-react';
 import { useNavigate  } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 function Login() {
@@ -24,21 +24,22 @@ function Login() {
         const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         //Validaciones
         if(email === "" || password === ""){
-            swAlert(
-                <div>
-                    <h2>los campos no pueden estas vacios</h2>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis aperiam vitae at totam fugit dolorem ipsa, temporibus blanditiis sapiente? Nobis vitae quaerat culpa voluptates officiis cumque ratione sunt doloremque commodi.</p>
-                </div>
-            );
+            swal.fire({
+                title: 'Error, los campos no pueden estas vacios!',
+                text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis aperiam vitae at totam fugit dolorem ipsa,',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            })           
             return
         }
 
         if(email !== "" && !regexEmail.test(email)){
-            swAlert(
-                <div>
-                    <h2>debes escribir una direccion de correo valido</h2>
-                </div>
-            )
+            swal.fire({
+                title: 'Error!',
+                text: 'debes escribir una direccion de correo valido',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            }) 
             return
         }
 
@@ -54,7 +55,12 @@ function Login() {
         axios.post('http://challenge-react.alkemy.org',{email,password})
             .then(res => {
                 //Si resulta exitoso mandamos alerta
-                swAlert(<h2>Perfecto, estas dentro</h2>)
+                swal.fire({
+                    title: 'Succes!',
+                    text: 'Perfecto, estas dentro',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
                 //guardamos el token que recibimos
                 setToken( res.data.token)
                 //lo guardamos en el localStorage
