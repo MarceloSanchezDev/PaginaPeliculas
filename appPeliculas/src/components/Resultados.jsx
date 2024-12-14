@@ -32,7 +32,7 @@ function Resultados() {
                         confirmButtonText: 'Ok'})
                 }
             } )
-            .catch(e => Swal.fire({
+            .catch(() => Swal.fire({
                 title: 'Error!',
                 text: 'Error de conexion',
                 icon: 'error',

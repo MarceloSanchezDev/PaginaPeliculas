@@ -43,7 +43,7 @@ function Listado() {
 
             // y modificamos el estado del listado de peliculas
             setListadoPeliculas(apiData.results)
-        }).catch(e => swal.fire({
+        }).catch(() => swal.fire({
                         title: 'Error, intenta mas tarde!',
                         text: 'Error de conexion',
                         icon: 'error',
