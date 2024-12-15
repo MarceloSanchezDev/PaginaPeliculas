@@ -3,11 +3,12 @@ import swal from 'sweetalert2'
 import { Link, useNavigate  } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-function Listado() {
+
+function Listado( props ) {
     //inicializamos el estado del listado de peliculas
     const apikey = import.meta.env.VITE_API_KEY
     const [listadoPeliculas ,setListadoPeliculas] = useState([])
-
+    console.log(props)
     //Navigate para navegar entre rutas
 
     const navigate = useNavigate()
@@ -49,7 +50,7 @@ function Listado() {
                         icon: 'error',
                         confirmButtonText: 'Ok'
                     })  )
-    },[setListadoPeliculas])
+    },[setListadoPeliculas, apikey])
     
     return(
         <>
@@ -58,21 +59,25 @@ function Listado() {
                 {listadoPeliculas.map((movie, ind)=>{
                     return(
                                 <div className="col-3 my-4" key={ind}>
-                                                    <div className="card">
-                                    <img 
-                                        src={movie.poster_path 
-                                            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` 
-                                            : "https://via.placeholder.com/500x750?text=No+Image"} 
-                                        className="card-img-top" 
-                                        alt={movie.title || "Movie poster"} 
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{movie.title.substring(0,30)+ "..."}</h5>
-                                        <p className="card-text">{movie.overview.substring(0,100) + "..."}</p>
-                                        {/*Mostramos el id en la URL */}
-                                        <Link to={`/detalle?MovieID=${movie.id}`} className="btn btn-primary">View Detail</Link>
+                                    <div className="card">
+                                        <img 
+                                            src={movie.poster_path 
+                                                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` 
+                                                : "https://via.placeholder.com/500x750?text=No+Image"} 
+                                            className="card-img-top" 
+                                            alt={movie.title || "Movie poster"} 
+                                        />
+                                        <button className='favorite-btn' onClick={props.addOrRemoveFromFavs} data-movie-id = {movie.id}>
+                                            🖤
+                                            
+                                        </button>
+                                        <div className="card-body">
+                                            <h5 className="card-title">{movie.title.substring(0,30)+ "..."}</h5>
+                                            <p className="card-text">{movie.overview.substring(0,100) + "..."}</p>
+                                            {/*Mostramos el id en la URL */}
+                                            <Link to={`/detalle?MovieID=${movie.id}`} className="btn btn-primary">View Detail</Link>
+                                        </div>
                                     </div>
-                                </div>
 
                                 </div>
                     )

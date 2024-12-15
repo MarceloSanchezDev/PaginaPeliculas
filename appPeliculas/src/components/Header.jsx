@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
 
 //Componentes
 
 import Buscador from "./Buscador"
-function Header() {
+function Header(props) {
+    let token = sessionStorage.getItem('token')
     return(
         <>
         <header>
@@ -17,8 +18,13 @@ function Header() {
                         <div className="navbar-nav">
                             <Link className="nav-link active" aria-current="page" to={'/'}>Home</Link>
                             <Link className="nav-link" to={'listado'}>Listado</Link>
-                            <Link className="nav-link" to={'contacto'}>Contacto</Link>
+                            <Link className="nav-link" to={'favoritos'}>favoritos
+                              {token && 
+                              props.favoritos.length
+                              }
+                              
 
+                              </Link>
                         </div>
                         </div>
                     </div>

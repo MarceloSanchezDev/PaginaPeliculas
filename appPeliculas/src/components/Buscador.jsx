@@ -1,7 +1,14 @@
 import swal from 'sweetalert2'
 import { useNavigate  } from 'react-router-dom';
+import { useEffect } from 'react';
 function Buscador() {
     const navigate = useNavigate()
+    let token = sessionStorage.getItem('token')
+    useEffect(()=>{
+
+        if(token === null){navigate('/')}
+
+    },[token,navigate])
     const submitHandfler = e => {
         e.preventDefault()
         const keyword = e.currentTarget.keyword.value.trim()
