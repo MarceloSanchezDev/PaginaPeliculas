@@ -26,7 +26,7 @@ function Buscador() {
         }
     }
     return(
-        <form onSubmit={submitHandfler} className="d-flex aling-items-center">
+        <form onSubmit={submitHandfler} className="d-flex aling-items-center p-2">
             <label className="form-label mb-0 mx-2" >
                 <input type="text" className="form-control" name="keyword" placeholder="Escribe una palabra clave...."/>
             </label>
