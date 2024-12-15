@@ -18,12 +18,10 @@ function Resultados() {
     let query = new URLSearchParams(window.location.search)
     const apikey = import.meta.env.VITE_API_KEY
     let keyword= query.get('keyword')
-    console.log(keyword)
     useEffect(()=>{
              axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apikey}&language=es-ES&query=${keyword}`)
             .then(res =>{
-                setResultadoPeliculas(res.data.results)
-                console.log(res.data)  
+                setResultadoPeliculas(res.data.results)  
                 if(res.data.results.length == 0){
                     Swal.fire({
                         title: 'Error!',
@@ -32,7 +30,7 @@ function Resultados() {
                         confirmButtonText: 'Ok'})
                 }
             } )
-            .catch(() => Swal.fire({
+            .catch( Swal.fire({
                 title: 'Error!',
                 text: 'Error de conexion',
                 icon: 'error',

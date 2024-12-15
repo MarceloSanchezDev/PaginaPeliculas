@@ -8,7 +8,6 @@ function Listado( props ) {
     //inicializamos el estado del listado de peliculas
     const apikey = import.meta.env.VITE_API_KEY
     const [listadoPeliculas ,setListadoPeliculas] = useState([])
-    console.log(props)
     //Navigate para navegar entre rutas
 
     const navigate = useNavigate()
@@ -54,7 +53,7 @@ function Listado( props ) {
     
     return(
         <>
-            <div className="row">
+            <div className="row mt-100">
                 {/* Estructura base */}
                 {listadoPeliculas.map((movie, ind)=>{
                     return(

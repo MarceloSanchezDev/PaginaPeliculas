@@ -1,6 +1,6 @@
 function Footer() {
     return(
-        <footer className="fixed-bottom">
+        <footer className="fixed-bottom bg-black text-white">
             <nav>
             <ul className="nav justify-content-center">
                     <li className="nav-item">

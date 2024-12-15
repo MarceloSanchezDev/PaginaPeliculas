@@ -7,9 +7,9 @@ function Header(props) {
     let token = sessionStorage.getItem('token')
     return(
         <>
-        <header>
+        <header className='sticky-top  mb-10 '>
                 <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                    <div className="container-fluid">
+                    <div className="container-fluid ">
                         <a className="navbar-brand" href="#">App Peliculas</a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -18,9 +18,9 @@ function Header(props) {
                         <div className="navbar-nav">
                             <Link className="nav-link active" aria-current="page" to={'/'}>Home</Link>
                             <Link className="nav-link" to={'listado'}>Listado</Link>
-                            <Link className="nav-link" to={'favoritos'}>favoritos
+                            <Link className="nav-link" to={'favoritos'}>favoritos :  
                               {token && 
-                              props.favoritos.length
+                              ` ${props.favoritos.length}`
                               }
                               
 

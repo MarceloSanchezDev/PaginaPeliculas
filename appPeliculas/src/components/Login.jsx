@@ -59,7 +59,6 @@ function Login() {
                 sessionStorage.setItem('token', res.data.token);
                 //guardamos el token que recibimos
                 setToken(res.data.token)
-                console.log(res.data.token)
                 //Si resulta exitoso mandamos alerta
                 swal.fire({
                     title: 'Succes!',

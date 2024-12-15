@@ -32,7 +32,6 @@ function App() {
   }else{
     tempMoviesInFavs = JSON.parse(favMovies)
   }
-  console.log(tempMoviesInFavs)
   const addOrRemoveFromFavs=(e)=>{
     const btn = e.currentTarget
     const parent = btn.parentElement
@@ -46,17 +45,14 @@ function App() {
     }
 
     let moviesIsInTheArray = tempMoviesInFavs.find(m => movieData.id === m.id)
-    console.log(moviesIsInTheArray)
     if(!moviesIsInTheArray){
       tempMoviesInFavs.push(movieData)
       localStorage.setItem('favs', JSON.stringify(tempMoviesInFavs))
       setFavorites(tempMoviesInFavs)
-      console.log('se agrego la pelicula', movieData)
     }else{
       tempMoviesInFavs = tempMoviesInFavs.filter(m => movieData.id !== m.id);
       localStorage.setItem('favs', JSON.stringify(tempMoviesInFavs));
       setFavorites(tempMoviesInFavs)
-      console.log('se elimino la pelicula', tempMoviesInFavs)
     }
 
   }

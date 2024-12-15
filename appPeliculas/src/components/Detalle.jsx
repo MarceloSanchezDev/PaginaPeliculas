@@ -21,16 +21,14 @@ function Detalle() {
             axios.get(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apikey}&language=en-US`)
             .then(res =>{
                 setMovie(res.data)
-                console.log(res.data)  
             } )
-            .catch(e => swal.fire({
+            .catch( swal.fire({
                 title: 'Error!',
                 text: 'Error de conexion',
                 icon: 'error',
                 confirmButtonText: 'Ok'
             }),[])
-            //
-        console.log(movieID)
+
         },[movieID,apikey])
     return(
         <>
