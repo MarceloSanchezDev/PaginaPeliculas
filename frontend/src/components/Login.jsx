@@ -5,6 +5,8 @@ import { useNavigate  } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 function Login() {
     const [token, setToken] = useState(sessionStorage.getItem('token'))
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState(null)
     //Navigate para navegar entre rutas
     const navigate = useNavigate()
     //Protejo la ruta Login , si hay token redirijo al Listado
@@ -18,8 +20,8 @@ function Login() {
     const submitHandler = (e)=>{
         e.preventDefault()
         //guardamos los inputs values
-        const email = e.target.email.value
-        const password = e.target.password.value
+        setEmail(e.target.email.value) 
+        setPassword(e.target.password.value)  
         //Regex para validar el Email
         const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         //Validaciones
@@ -53,6 +55,7 @@ function Login() {
             return
         }
         //Axios Post para mandar las credenciales a la API
+        axios.post('http://localhost:3000/login',{email,password}).then(res => console.log(res).catch(e => console.log(e)))
         axios.post('http://challenge-react.alkemy.org',{email,password})
             .then(res => {
                 //lo guardamos en el sessionStorage
