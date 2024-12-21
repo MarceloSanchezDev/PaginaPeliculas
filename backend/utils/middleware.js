@@ -15,16 +15,16 @@ export const unknownEndpoint = (req, res) => {
 export const errorHandler = (error, req, res, next) => {
   if (error.name === 'TypeError') {
     cError('(middleware)', error.name, error)
-    return res.status(400).send({ error: 'Usuario o contraseña incorreactas' })
+    res.status(400).send({ error: 'Usuario o contraseña incorreactas' })
   } else if (error.name === 'ValidationError') {
     cError('(middleware)', error.name, error)
-    return res.status(400).json({ error: 'error en las credenciales' })
+    res.status(400).json({ error: 'error en las credenciales' })
   } else if (error.name === 'TokenExpiredError') {
     cError('(middleware)', error.name, error)
-    return res.status(400).json({ error: 'token expirado' })
+    res.status(400).json({ error: 'token expirado' })
   } else if (error.name === 'JsonWebTokenError') {
     cError('(middleware)', error.name, error)
-    return res.status(400).json({ error: 'No hay token' })
+    res.status(400).json({ error: 'No hay token' })
   }
 
   next(error)

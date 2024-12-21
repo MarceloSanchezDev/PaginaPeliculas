@@ -5,24 +5,25 @@ import { info, cError } from '../../utils/logger.js'
 import { createClient } from '@libsql/client'
 
 const db = createClient({
- url: 'libsql://usuariospeliculas-marcelosanchezdev.turso.io',
+  url: 'libsql://usuariospeliculas-marcelosanchezdev.turso.io',
   authToken: DBTOKEN
 })
-/* CREATE TABLE IF NOT EXISTS  USER(id_user varchar(36) primary key,nombre varchar(255),apellido varchar(255),username TEXT unique,password varchar(255), email varchar(255)) */
-/* CREATE TABLE IF NOT EXISTS  user_favoritos(id_movie varchar(36) primary key,*/
-//await db.execute('CREATE TABLE IF NOT EXISTS  USER(id_user varchar(36) primary key,nombre varchar(255),apellido varchar(255),username TEXT unique,password varchar(255), email varchar(255))')
-//await db.execute('CREATE TABLE IF NOT EXISTS  user_estadisticas(id_stat varchar(36) primary key,fecha DATE,estadisticasDosPuntos decimal(5,2),estadisticasTresPuntos decimal(5,2),user_username varchar(255),nombreEstadistica varchar(255), cant_dosPuntos int(11),cant_tresPuntos int(11),cant_dosPuntosEncestados int(11),cant_tresPuntosEncestados int(11),hora time, foreign key(user_username) references user(username))')
+/* CREATE TABLE IF NOT EXISTS  USER(id_user varchar(36) primary key,nombre varchar(255),apellido varchar(255),username TEXT unique,password varchar(255), email varchar(255) unique) */
+/* CREATE TABLE IF NOT EXISTS  user_favoritos(id_movie varchar(36) primary key),*/
+await db.execute('CREATE TABLE IF NOT EXISTS USER (id_user varchar(36) primary key, nombre varchar(255), apellido varchar(255), username TEXT unique, password varchar(255), email varchar(255) unique)');
+
+
+//await db.execute('')
 
 export class UserModel {
   static async registerUser ({ input }) {
     // extraigo del input los siguientes datos
     const {
-      username,
-      password,
-      nombre,
-      apellido,
-      email
-    } = input
+            username,
+            password,
+            nombre,
+            apellido,
+            email  } = input
     info('(Modelo)input:', input)
     // hasheo la contraseña
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
