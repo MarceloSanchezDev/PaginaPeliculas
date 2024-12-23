@@ -10,7 +10,7 @@ const db = createClient({
 })
 /* CREATE TABLE IF NOT EXISTS  USER(id_user varchar(36) primary key,nombre varchar(255),apellido varchar(255),username TEXT unique,password varchar(255), email varchar(255) unique) */
 /* CREATE TABLE IF NOT EXISTS  user_favoritos(id_movie varchar(36) primary key),*/
-await db.execute('CREATE TABLE IF NOT EXISTS USER (id_user varchar(36) primary key, nombre varchar(255), apellido varchar(255), username TEXT unique, password varchar(255), email varchar(255) unique)');
+await db.execute('CREATE TABLE IF NOT EXISTS USER (id_user varchar(36) primary key, username TEXT, password varchar(255), email varchar(255) unique)');
 
 
 //await db.execute('')
@@ -21,8 +21,6 @@ export class UserModel {
     const {
             username,
             password,
-            nombre,
-            apellido,
             email  } = input
     info('(Modelo)input:', input)
     // hasheo la contraseña
@@ -34,10 +32,11 @@ export class UserModel {
     try {
       // inserto en la base de datos el nuevo usuario
       await db.execute(
-        'INSERT INTO user (id_user, username, password, nombre, apellido, email) values(?,?,?,?,?,?)', [uuidResult, username, hashedPassword, nombre, apellido, email])
+        'INSERT INTO user (id_user, username, password, email) values(?,?,?,?)', [uuidResult, username, hashedPassword, email])
     } catch (e) {
-      // si hay algun error lo envio al controlador
-      cError('(Modelo)Error register a User', e)
+      // si hay algun error lo envio al controlador 
+      cError('(Modelo)Error registrar al Usuario', e.name , e.message )
+      return e
     }
     // devuelvo el usuario al controlador si fue un exito
     const { rows } = await db.execute(

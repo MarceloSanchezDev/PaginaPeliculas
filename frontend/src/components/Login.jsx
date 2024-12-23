@@ -55,7 +55,7 @@ function Login() {
             return
         }
         //Axios Post para mandar las credenciales a la API
-        axios.post('http://localhost:3000/login',{email,password}).then(res => console.log(res).catch(e => console.log(e)))
+        axios.post('http://localhost:3000/auth/login',{email,password}).then(res => console.log(res).catch(e => console.log(e)))
         axios.post('http://challenge-react.alkemy.org',{email,password})
             .then(res => {
                 //lo guardamos en el sessionStorage

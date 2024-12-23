@@ -8,12 +8,17 @@ export class UserController {
   static async registerUser (req, res, next) {
     try {
       // envio al esquema el body de la request
+      info('(Controlador):',req.body)
       const result = validRegisterUser(req.body)
       info('(Controlador)resutado :', result.data)
       // si sale exitosa se envia al modelo
       const userValid = await UserModel.registerUser({ input: result.data })
+      if(userValid instanceof Error){
+        next(userValid)
+        return
+      }
       // si el modelo crea con exito el usuario , extraigo el username , nombre, apellido y el id
-      const { username, nombre, apellido, id } = userValid[0]
+      const { username, id } = userValid[0]
       info('(Controlador)UserValid :', userValid)
       info('(Controlador)username:', username, 'id:', id)
       // los imprimo en el token
@@ -23,7 +28,7 @@ export class UserController {
       info('(Controlador)token :', token)
       info('(Controlador)nuevo usuario creado : ', userValid)
       // los envio al front
-      res.send({ username, nombre, apellido, token })
+      res.send({ username, token })
     } catch (error) {
       // si hay algun error los mando al middleware
       next(error)
@@ -38,8 +43,8 @@ export class UserController {
       // si sale exitosa se envia al modelo
       const userValid = await UserModel.login({ input: result.data })
       info('(Controlador)UserValid :', userValid)
-      // si el modelo crea con exito el usuario , extraigo el username , nombre, apellido y el id en Hexadecimal
-      const { username, nombre, apellido, id } = userValid
+      // si el modelo crea con exito el usuario , extraigo el username y el id en Hexadecimal
+      const { username, id } = userValid
       info('(Controlador)username:', username, 'id:', id)
       // los imprimo en el token
       const token = jwt.sign({ id, username }, SECRET_KEY, {

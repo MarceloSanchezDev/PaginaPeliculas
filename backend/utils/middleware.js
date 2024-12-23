@@ -25,7 +25,9 @@ export const errorHandler = (error, req, res, next) => {
   } else if (error.name === 'JsonWebTokenError') {
     cError('(middleware)', error.name, error)
     res.status(400).json({ error: 'No hay token' })
+  } else if(error.name == 'LibsqlError'){
+    cError('(middleware)',error.name,error)
+    res.status(400).json({error: 'El Email ya esta registrado'}) 
   }
-
   next(error)
 }
