@@ -22,12 +22,16 @@ function Detalle() {
             .then(res =>{
                 setMovie(res.data)
             } )
-            .catch( swal.fire({
-                title: 'Error!',
-                text: 'Error de conexion',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            }),[])
+            .catch((e)=>{
+                console.log(e)
+                swal.fire({
+                   title: 'Error!',
+                   text: 'Error de conexion',
+                   icon: 'error',
+                   confirmButtonText: 'Ok'
+               })
+            }   
+            ,[])
 
         },[movieID,apikey])
     return(
