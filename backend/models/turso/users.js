@@ -49,13 +49,13 @@ export class UserModel {
   static async login ({ input }) {
     // extraigo del input los siguientes datos
     const {
-      username,
+      email,
       password
     } = input
     info('(Modelo)info del usuario:', input)
     try {
       // busco al usuario en a base de datos
-      const { rows } = await db.execute('SELECT *, id_user as id FROM user WHERE username = ?', [username])
+      const { rows } = await db.execute('SELECT *, id_user as id FROM user WHERE email = ?', [email])
       info('(Modelo) user', rows)
       if (rows.length === 0) { throw new Error('User not found') }
       const validatedUser = rows[0]
@@ -68,6 +68,7 @@ export class UserModel {
     } catch (e) {
       // si hay algun error lo envio al controlador
       cError('(Modelo)error al iniciar sesion', e)
+      return e
     }
   }
 }

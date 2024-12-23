@@ -44,34 +44,32 @@ function Login() {
             }) 
             return
         }
-
-        if (email !== "challenge@alkemy.org" && password !== "react") {
-            swal.fire({
-                title: 'Error!',
-                text: 'Credenciales Invalidas',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            }) 
-            return
-        }
         //Axios Post para mandar las credenciales a la API
-        axios.post('http://localhost:3000/auth/login',{email,password}).then(res => console.log(res).catch(e => console.log(e)))
-        axios.post('http://challenge-react.alkemy.org',{email,password})
-            .then(res => {
-                //lo guardamos en el sessionStorage
-                sessionStorage.setItem('token', res.data.token);
-                //guardamos el token que recibimos
-                setToken(res.data.token)
-                //Si resulta exitoso mandamos alerta
-                swal.fire({
-                    title: 'Succes!',
-                    text: 'Perfecto, estas dentro',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                })
-                //redireccionamos 
-                navigate('/listado')
+        axios.post('http://localhost:3000/auth/login',{email,password})
+        .then(res => {
+            //lo guardamos en el sessionStorage
+            sessionStorage.setItem('token', res.data.token);
+            //guardamos el token que recibimos
+            setToken(res.data.token)
+            //Si resulta exitoso mandamos alerta
+            swal.fire({
+                title: 'Succes!',
+                text: 'Perfecto, estas dentro',
+                icon: 'success',
+                confirmButtonText: 'Ok'
             })
+            //redireccionamos 
+            navigate('/listado')
+        })
+        .catch((e)=>{
+            console.log(e.data.error)
+            swal.fire({
+            title: 'Error al Iniciar Sesion',
+            text: `${e.response.data.error}`,
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        })} )
+
         
     }
     return(
