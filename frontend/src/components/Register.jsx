@@ -14,9 +14,6 @@ function Register() {
         const submitHandler = (e)=>{
             e.preventDefault()
             //guardamos los inputs values
-            //Regex para validar el Email
-            const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            //Validaciones
             if(email === "" || password === "" || username === ''){
                 swal.fire({
                     title: 'Error, los campos no pueden estas vacios!',
@@ -44,17 +41,6 @@ function Register() {
                 })           
                 return
             }
-    
-            if(email !== "" && !regexEmail.test(email)){
-                swal.fire({
-                    title: 'Error!',
-                    text: 'debes escribir una direccion de correo valido',
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                }) 
-                return
-            }
-            console.log(email,password,username)
             //Axios Post para mandar las credenciales a la API
             axios.post('http://localhost:3000/auth/register',{email,password,username})
             .then(res => {

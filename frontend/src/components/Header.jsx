@@ -1,10 +1,21 @@
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import swal from 'sweetalert2'
 //Componentes
 
 import Buscador from "./Buscador"
 function Header(props) {
     let token = sessionStorage.getItem('token')
+    const navigate = useNavigate()
+    const handlerSession = ()=>{
+        sessionStorage.clear()
+        navigate('/');
+        swal.fire({
+            title: 'Succes!',
+            text: 'Perfecto, session finalizada',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        })
+    }
     return(
         <>
         <header className='sticky-top  mb-10 '>
@@ -29,6 +40,7 @@ function Header(props) {
                         </div>
                     </div>
                     <Buscador></Buscador>
+                    <button className="btn text-white" onClick={handlerSession}>Cerrar Sesion</button>
                     </nav>        
         </header>
         </>
