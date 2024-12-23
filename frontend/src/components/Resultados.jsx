@@ -30,12 +30,16 @@ function Resultados() {
                         confirmButtonText: 'Ok'})
                 }
             } )
-            .catch( Swal.fire({
-                title: 'Error!',
-                text: 'Error de conexion',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            }))
+            .catch((e)=>{
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error de conexion',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+                console.log(e)
+    
+            }) 
         },[apikey,keyword])
     return(
         <>

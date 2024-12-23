@@ -5,7 +5,6 @@ import swal from 'sweetalert2'
 import Buscador from "./Buscador"
 function Header(props) {
     let token = sessionStorage.getItem('token')
-    console.log(token)
     const navigate = useNavigate()
     const handlerSession = ()=>{
         sessionStorage.clear()
