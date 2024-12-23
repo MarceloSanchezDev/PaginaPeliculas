@@ -1,7 +1,7 @@
 //Librerias
 import swal from 'sweetalert2'
 import axios from 'axios'
-import { useNavigate  } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 function Login() {
     const [token, setToken] = useState(sessionStorage.getItem('token'))
@@ -67,6 +67,7 @@ function Login() {
                         <br />
                         <button className='btn btn-primary' type="submit">Ingresar</button>
                     </form>
+                    <Link to={'/registro'}>Si no tienes una Cuenta, Regristrate</Link>
             </div>   
         </div>
         </>

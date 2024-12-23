@@ -2,7 +2,7 @@
 import swal from 'sweetalert2'
 import axios from 'axios'
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function Register() {
         const [email, setEmail] = useState(null)
         const [password, setPassword] = useState(null)
@@ -94,6 +94,7 @@ function Register() {
                         <br />
                         <button className='btn btn-primary' type="submit">Registrar</button>
                     </form>
+                    <Link to={'/'}>Si ya tienes una Cuenta, Inicia Sesion</Link>
             </div>   
         </div>
         </>
