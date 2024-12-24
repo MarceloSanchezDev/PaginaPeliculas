@@ -49,8 +49,8 @@ function Login() {
     }
     return(
         <>
-        <div className='row'>
-            <div className='col-6 offset-3'>
+        <div className='row mt-5 mb-5'>
+            <div className='col-6 offset-3 mt-5 mb-5'>
                     <h2>Formulario de Login</h2>
                     <form onSubmit={submitHandler}>
                         <label className='form-label d-block mt-2'>
