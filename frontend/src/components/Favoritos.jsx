@@ -11,7 +11,7 @@ function Favoritos(props) {
     },[token,navigate])
     return(
         <>
-            <div className="row">
+            <div className="row mt-5 mb-5">
                 {/* Estructura base */}
                 {props.favorites.map((movie, ind)=>{
                     return(

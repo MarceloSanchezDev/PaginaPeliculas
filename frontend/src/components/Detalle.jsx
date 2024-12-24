@@ -17,7 +17,7 @@ function Detalle() {
         if(!token){navigate('/')}
         
     },[token,navigate])
-        useEffect(()=>{
+    useEffect(()=>{
             axios.get(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apikey}&language=en-US`)
             .then(res =>{
                 setMovie(res.data)
@@ -33,14 +33,14 @@ function Detalle() {
             }   
             ,[])
 
-        },[movieID,apikey])
+    },[movieID,apikey])
     return(
         <>
         {!movie && <p>Cargando....</p>}
         {movie &&
         <>
-            <h2>Titulo : {movie.title}</h2>
-            <div className="row">
+            <div className="row mt-5 mb-5">
+                <h2 className="mt-5 mb-5" >Titulo : {movie.title}</h2>
                 <div className="col-4">
                 <img className="img-fluid"  src={movie.poster_path
                     ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` 

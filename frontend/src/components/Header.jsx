@@ -29,7 +29,6 @@ function Header(props) {
                             </button>
                             <div className="collapse navbar-collapse text-white" id="navbarNavAltMarkup">
                                         <div className="navbar-nav text-white">
-                                            <Link className="nav-link active text-white" aria-current="page" to={'/'}>Home</Link>
                                             <Link className="nav-link text-white" to={'listado'}>Listado</Link>
                                             <Link className="nav-link text-white" to={'favoritos'}>favoritos :  
                                             {token && 
