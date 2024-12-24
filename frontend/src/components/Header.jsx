@@ -18,7 +18,7 @@ function Header(props) {
     }
     return(
         <>
-        <header className='sticky-top  mb-10 '>
+        <header className='position-fixed w-100 top-0 start-0 z-1  '>
                 <nav className="navbar navbar-expand-lg bg-black text-white">
                     <div className="container-fluid text-white">
                         <Link className="navbar-brand text-white" to={'/'}>App Peliculas</Link>

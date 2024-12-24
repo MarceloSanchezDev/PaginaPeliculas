@@ -53,7 +53,7 @@ function Listado( props ) {
     
     return(
         <>
-            <div className="row mt-100">
+            <div className="row mt-5 mb-5">
                 {/* Estructura base */}
                 {listadoPeliculas.map((movie, ind)=>{
                     return(
