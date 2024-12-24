@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import Detalle from './components/Detalle'
 import Resultados from './components/Resultados'
 import Favoritos from './components/Favoritos'
+import Register from './components/Register'
 //styles
 import './css/bootstrap.min.css'
 import './css/App.css'
@@ -64,6 +65,7 @@ function App() {
       <Routes>
           {/*Route es la ruta donde se renderiza el elemento */}
           <Route path='/' element={<Login/>}/>
+          <Route path='/registro' element={<Register/>}/>
           <Route path='/listado' element ={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs}/>}/>
           <Route path='/detalle' element={<Detalle/>}/>
           <Route path='/resultados' element={<Resultados/>}/>

@@ -53,7 +53,7 @@ function Listado( props ) {
     
     return(
         <>
-            <div className="row mt-100">
+            <div className="row mt-5 mb-5">
                 {/* Estructura base */}
                 {listadoPeliculas.map((movie, ind)=>{
                     return(
@@ -71,7 +71,7 @@ function Listado( props ) {
                                             
                                         </button>
                                         <div className="card-body">
-                                            <h5 className="card-title">{movie.title.substring(0,30)+ "..."}</h5>
+                                            <h5 className="card-title">{movie.title.substring(0,10)+ "..."}</h5>
                                             <p className="card-text">{movie.overview.substring(0,100) + "..."}</p>
                                             {/*Mostramos el id en la URL */}
                                             <Link to={`/detalle?MovieID=${movie.id}`} className="btn btn-primary">View Detail</Link>
