@@ -20,7 +20,7 @@ function Login() {
     const submitHandler = (e)=>{
         e.preventDefault()
         //Axios Post para mandar las credenciales a la API
-        axios.post('http://localhost:3000/auth/login',{email,password})
+        axios.post('/auth/login',{email,password})
         .then(res => {
             //lo guardamos en el sessionStorage
             sessionStorage.setItem('token', res.data.token);

@@ -42,7 +42,7 @@ function Register() {
                 return
             }
             //Axios Post para mandar las credenciales a la API
-            axios.post('http://localhost:3000/auth/register',{email,password,username})
+            axios.post('/auth/register',{email,password,username})
             .then(res => {
                 console.log(res)
                 //lo guardamos en el sessionStorage
