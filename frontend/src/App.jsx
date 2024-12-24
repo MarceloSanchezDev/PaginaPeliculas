@@ -13,17 +13,27 @@ import Register from './components/Register'
 //styles
 import './css/bootstrap.min.css'
 import './css/App.css'
+import axios from 'axios'
 
 function App() {
+  const [api_key,setApikey] = useState(null)
   const [favorites, setFavorites] = useState ([])
+  
+  async function fechtApiKey() {
+    const res = await axios.get('http://localhost:3000/apikey').then(res => res.data.apikey)
+    console.log(res)
+    setApikey(res)
+  }
+  fechtApiKey()
     useEffect(()=>{
+        console.log(api_key)
         const favsInLocal = localStorage.getItem('favs')
         if(favsInLocal !== null){
             const favsArray = JSON.parse(favsInLocal)
             setFavorites(favsArray)
         }
-    },[])
-
+    },[api_key])
+  
   const favMovies = localStorage.getItem('favs')
 
   let tempMoviesInFavs
@@ -66,10 +76,10 @@ function App() {
           {/*Route es la ruta donde se renderiza el elemento */}
           <Route path='/' element={<Login/>}/>
           <Route path='/registro' element={<Register/>}/>
-          <Route path='/listado' element ={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs}/>}/>
-          <Route path='/detalle' element={<Detalle/>}/>
-          <Route path='/resultados' element={<Resultados/>}/>
-          <Route path="/favoritos" element={<Favoritos favorites = {favorites}addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />
+          <Route path='/listado' element ={<Listado api_key={api_key} addOrRemoveFromFavs={addOrRemoveFromFavs}/>}/>
+          <Route path='/detalle' element={<Detalle api_key={api_key} />}/>
+          <Route path='/resultados' element={<Resultados api_key={api_key}/>}/>
+          <Route path="/favoritos" element={<Favoritos api_key={api_key} favorites = {favorites}addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />
       </Routes>
       <Footer/>
     </div>

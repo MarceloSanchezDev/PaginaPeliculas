@@ -3,10 +3,10 @@ import swal from 'sweetalert2'
 import { useEffect, useState } from "react"
 import { useNavigate  } from 'react-router-dom';
 
-function Detalle() {
+function Detalle(props) {
+    console.log(props)
     const [movie, setMovie] = useState(null)
     const navigate = useNavigate()
-    const apikey = import.meta.env.VITE_API_KEY
     let query = new URLSearchParams(window.location.search)
 
     let movieID= query.get('MovieID')
@@ -18,22 +18,31 @@ function Detalle() {
         
     },[token,navigate])
     useEffect(()=>{
-            axios.get(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apikey}&language=en-US`)
-            .then(res =>{
-                setMovie(res.data)
-            } )
-            .catch((e)=>{
-                console.log(e)
-                swal.fire({
-                   title: 'Error!',
-                   text: 'Error de conexion',
-                   icon: 'error',
-                   confirmButtonText: 'Ok'
-               })
-            }   
-            ,[])
+        const fetchMovieDetail = async () => {
+            if(props.api_key !== null){
+                    try {
+                        // Hacer el pedido a la API
+                        await axios.get(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${props.api_key}&language=en-US`)
+                        .then(res =>{
+                            setMovie(res.data)
+                        } );
+                                    
+                    } catch (error) {
+                        // Manejo de errores
+                        console.error("Error al obtener los datos de la API:", error);
+                        swal.fire({
+                            title: 'Error, intenta más tarde!',
+                            text: 'Error de conexión',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                        });
+                    }
+            }
+        };
 
-    },[movieID,apikey])
+        fetchMovieDetail();
+            
+    },[movieID,props.api_key])
     return(
         <>
         {!movie && <p>Cargando....</p>}

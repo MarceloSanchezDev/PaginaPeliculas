@@ -1,19 +1,16 @@
 import bcrypt from 'bcrypt'
 import crypto from 'node:crypto'
-import { SALT_ROUNDS, DBTOKEN } from '../../utils/config.js'
-import { info, cError } from '../../utils/logger.js'
+import { SALT_ROUNDS, DBTOKEN } from '../../../../PaginaPeliculas/utils/config.js'
+import { info, cError } from '../../../utils/logger.js'
 import { createClient } from '@libsql/client'
 
 const db = createClient({
   url: 'libsql://usuariospeliculas-marcelosanchezdev.turso.io',
   authToken: DBTOKEN
 })
-/* CREATE TABLE IF NOT EXISTS  USER(id_user varchar(36) primary key,nombre varchar(255),apellido varchar(255),username TEXT unique,password varchar(255), email varchar(255) unique) */
 /* CREATE TABLE IF NOT EXISTS  user_favoritos(id_movie varchar(36) primary key),*/
 await db.execute('CREATE TABLE IF NOT EXISTS USER (id_user varchar(36) primary key, username TEXT, password varchar(255), email varchar(255) unique)');
 
-
-//await db.execute('')
 
 export class UserModel {
   static async registerUser ({ input }) {

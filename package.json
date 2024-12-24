@@ -1,6 +1,8 @@
 {
   "name": "paginapeliculas",
   "version": "1.0.0",
+  "workspaces":["Back-end", "Front-end"],
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,5 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
 }

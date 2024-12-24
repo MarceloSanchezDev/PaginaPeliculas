@@ -2,7 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { Link, useNavigate  } from 'react-router-dom';
 import Swal from "sweetalert2";
-function Resultados() {
+function Resultados(props) {
+    console.log(props)
     const [resultadoPeliculas , setResultadoPeliculas ] = useState([])
 
     const navigate = useNavigate()
@@ -16,31 +17,49 @@ function Resultados() {
     },[token,navigate])
 
     let query = new URLSearchParams(window.location.search)
-    const apikey = import.meta.env.VITE_API_KEY
     let keyword= query.get('keyword')
-    useEffect(()=>{
-             axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apikey}&language=es-ES&query=${keyword}`)
-            .then(res =>{
-                setResultadoPeliculas(res.data.results)  
-                if(res.data.results.length == 0){
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Tu busqueda no tuvo resultados',
-                        icon: 'error',
-                        confirmButtonText: 'Ok'})
-                }
-            } )
-            .catch((e)=>{
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Error de conexion',
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                })
-                console.log(e)
     
-            }) 
-        },[apikey,keyword])
+    useEffect( ()=>{
+        const fetchResults = async () => {
+            if(props.api_key !== null){
+                    try {
+                        // Hacer el pedido a la API
+                        await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${props.api_key}&language=es-ES&query=${keyword}`)
+                        .then(res =>{
+                            setResultadoPeliculas(res.data.results)
+                            if(res.data.results.length == 0){
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Tu busqueda no tuvo resultados',
+                                    icon: 'error',
+                                    confirmButtonText: 'Ok'})
+                            }
+                        } ) .catch((e)=>{
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Error de conexion',
+                                icon: 'error',
+                                confirmButtonText: 'Ok'
+                            })
+                            console.log(e)
+                
+                        }) 
+                                    
+                    } catch (error) {
+                        // Manejo de errores
+                        console.error("Error al obtener los datos de la API:", error);
+                        Swal.fire({
+                            title: 'Error, intenta más tarde!',
+                            text: 'Error de conexión',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                        });
+                    }
+            }
+        };
+
+        fetchResults();
+        },[keyword,props.api_key])
     return(
         <>
         {resultadoPeliculas &&

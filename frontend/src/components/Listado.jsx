@@ -2,11 +2,12 @@
 import swal from 'sweetalert2'
 import { Link, useNavigate  } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+
 import axios from 'axios';
 
 function Listado( props ) {
+    console.log(props)
     //inicializamos el estado del listado de peliculas
-    const apikey = import.meta.env.VITE_API_KEY
     const [listadoPeliculas ,setListadoPeliculas] = useState([])
     //Navigate para navegar entre rutas
 
@@ -24,33 +25,32 @@ function Listado( props ) {
 
     },[token,navigate])
 
-    //consumimos la api (peliculas mas populares)
-
-    useEffect(()=>{
-
-        const endPoint = `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&language=en-ES&PAGE=1}`
-
-        //hacemos el pedido a la api
-
-        axios.get(endPoint)
-
-        .then(res => {
-
-            //agarramos solo la data
-            const apiData = res.data
-
-            //agarramos solo los resultados 
-
-            // y modificamos el estado del listado de peliculas
-            setListadoPeliculas(apiData.results)
-        }).catch(() => swal.fire({
-                        title: 'Error, intenta mas tarde!',
-                        text: 'Error de conexion',
+    useEffect(() => {
+        const fetchMovies = async () => {
+            if(props.api_key !== null){
+                try {
+                    // Construir el endpoint con la API Key
+                    const endPoint = `https://api.themoviedb.org/3/discover/movie?api_key=${props.api_key}&language=en-ES&page=1`;
+                    // Hacer el pedido a la API
+                    const res = await axios.get(endPoint).then(res => res.data.results);
+                    // Actualizar el estado con los resultados
+                    setListadoPeliculas(res);
+                } catch (error) {
+                    // Manejo de errores
+                    console.error("Error al obtener los datos de la API:", error);
+                    swal.fire({
+                        title: 'Error, intenta más tarde!',
+                        text: 'Error de conexión',
                         icon: 'error',
-                        confirmButtonText: 'Ok'
-                    })  )
-    },[setListadoPeliculas, apikey])
-    
+                        confirmButtonText: 'Ok',
+                    });
+                }
+            
+            }
+        };
+
+        fetchMovies();
+    }, [props.api_key]);
     return(
         <>
             <div className="row mt-5 mb-5">
