@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { info } from '../../utils/logger.js'
+import { info } from '../utilsBackend/logger.js'
 
 const UserRegister = z.object({
   username: z.string({

@@ -1,8 +1,8 @@
 import { UserModel } from '../models/turso/users.js'
 import { validRegisterUser, validUser } from '../schema/userSchema.js'
 import jwt from 'jsonwebtoken'
-import { SECRET_KEY } from '../../../PaginaPeliculas/utils/config.js'
-import { info } from '../../../PaginaPeliculas/utils/logger.js'
+import { SECRET_KEY } from '../utilsBackend/config.js'
+import { info } from '../utilsBackend/logger.js'
 
 export class UserController {
   static async registerUser (req, res, next) {
