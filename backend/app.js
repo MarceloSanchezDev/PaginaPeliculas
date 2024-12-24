@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import cors from 'cors'
 import { requestLogger, unknownEndpoint, errorHandler } from './utilsBackend/middleware.js'
 import { authRouter } from './routes/auth.js'
-import {API_KEY} from '../utils/config.js'
+import {API_KEY} from './utilsBackend/config.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

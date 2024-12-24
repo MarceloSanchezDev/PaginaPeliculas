@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import crypto from 'node:crypto'
-import { SALT_ROUNDS, DBTOKEN } from '../../../../PaginaPeliculas/utils/config.js'
-import { info, cError } from '../../../utils/logger.js'
+import { SALT_ROUNDS, DBTOKEN } from '../../utilsBackend/config.js'
+import { info, cError } from '../../utilsBackend/logger.js'
 import { createClient } from '@libsql/client'
 
 const db = createClient({
