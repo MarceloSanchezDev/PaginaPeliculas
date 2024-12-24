@@ -20,7 +20,7 @@ function App() {
   const [favorites, setFavorites] = useState ([])
   
   async function fechtApiKey() {
-    const res = await axios.get('http://localhost:3000/apikey').then(res => res.data.apikey)
+    const res = await axios.get('/apikey').then(res => res.data.apikey)
     console.log(res)
     setApikey(res)
   }
