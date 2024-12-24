@@ -1,6 +1,7 @@
 {
   "name": "paginapeliculas",
   "version": "1.0.0",
+  "private": true,
   "workspaces":["Back-end", "Front-end"],
   "type": "module",
   "description": "",
