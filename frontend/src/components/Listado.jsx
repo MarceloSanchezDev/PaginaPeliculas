@@ -57,7 +57,7 @@ function Listado( props ) {
                 {/* Estructura base */}
                 {listadoPeliculas.map((movie, ind)=>{
                     return(
-                                <div className="col-3 my-4" key={ind}>
+                                <div className="col-12 col-md-3 my-4" key={ind}>
                                     <div className="card">
                                         <img 
                                             src={movie.poster_path 

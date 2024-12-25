@@ -70,7 +70,7 @@ function Resultados(props) {
         <div className="row">
         {resultadoPeliculas.map((movie)=>{
                     return(
-                                <div className="col-4 my-4" key={movie.id}>
+                                <div className="col-12 col-md-4 my-4" key={movie.id}>
                                                     <div className="card">
                                     <img 
                                         src={movie.poster_path 

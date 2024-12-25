@@ -15,7 +15,7 @@ function Favoritos(props) {
                 {/* Estructura base */}
                 {props.favorites.map((movie, ind)=>{
                     return(
-                                <div className="col-3 my-4" key={ind}>
+                                <div className="col-12 col-md-3 my-4" key={ind}>
                                     <div className="card">
                                         <img 
                                             src={movie.imgUrl 
