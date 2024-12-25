@@ -14,6 +14,7 @@ import axios from 'axios'
 //styles
 import './css/bootstrap.min.css'
 import './css/App.css'
+import './css/bootstrap.bundle.min.js';
 //appps
 function App() {
   const [api_key,setApikey] = useState(null)
@@ -21,12 +22,10 @@ function App() {
   
   async function fechtApiKey() {
     const res = await axios.get('/apikey').then(res => res.data.apikey)
-    console.log(res)
     setApikey(res)
   }
   fechtApiKey()
     useEffect(()=>{
-        console.log(api_key)
         const favsInLocal = localStorage.getItem('favs')
         if(favsInLocal !== null){
             const favsArray = JSON.parse(favsInLocal)

@@ -24,13 +24,13 @@ function Header(props) {
                         <Link className="navbar-brand text-white" to={'/'}>
                         <i className="bi bi-film"></i> App Peliculas
                         </Link>
-                        {token && 
-                        <>
                             <button className="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon text-white"></span>
                             </button>
+                        {token && 
+                        <>
                             <div className="collapse navbar-collapse text-white" id="navbarNavAltMarkup">
-                                        <div className="navbar-nav text-white">
+                                     <div className="navbar-nav text-white">
                                             <Link className="nav-link text-white" to={'listado'}>Listado</Link>
                                             <Link className="nav-link text-white" to={'favoritos'}>favoritos :  
                                             {token && 
@@ -39,10 +39,10 @@ function Header(props) {
                                             
 
                                             </Link>
-                                        </div>
-                                        </div>
-                                    <Buscador></Buscador>
-                                    <button className="btn text-white" onClick={handlerSession}>Cerrar Sesion  <i className="bi bi-box-arrow-in-left ps-2 h-50"></i></button>
+                                            <Buscador></Buscador>
+                                            <button className="btn text-white" onClick={handlerSession}>Cerrar Sesion  <i className="bi bi-box-arrow-in-left ps-2 h-50"></i></button>
+                                    </div>
+                            </div>
                         </>
                             }
                     </div>

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { useNavigate  } from 'react-router-dom';
 
 function Detalle(props) {
-    console.log(props)
     const [movie, setMovie] = useState(null)
     const navigate = useNavigate()
     let query = new URLSearchParams(window.location.search)
