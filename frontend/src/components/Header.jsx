@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert2'
 //Componentes
-import '../css/bootstrap.bundle.min.js';
+
 import Buscador from "./Buscador"
 function Header(props) {
     let token = sessionStorage.getItem('token')
@@ -39,10 +39,10 @@ function Header(props) {
                                             
 
                                             </Link>
+                                            <Buscador></Buscador>
+                                            <button className="btn text-white" onClick={handlerSession}>Cerrar Sesion  <i className="bi bi-box-arrow-in-left ps-2 h-50"></i></button>
                                     </div>
                             </div>
-                            <Buscador></Buscador>
-                            <button className="btn text-white" onClick={handlerSession}>Cerrar Sesion  <i className="bi bi-box-arrow-in-left ps-2 h-50"></i></button>
                         </>
                             }
                     </div>

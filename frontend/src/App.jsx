@@ -14,6 +14,7 @@ import axios from 'axios'
 //styles
 import './css/bootstrap.min.css'
 import './css/App.css'
+import './css/bootstrap.bundle.min.js';
 //appps
 function App() {
   const [api_key,setApikey] = useState(null)
