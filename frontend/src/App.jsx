@@ -10,10 +10,10 @@ import Detalle from './components/Detalle'
 import Resultados from './components/Resultados'
 import Favoritos from './components/Favoritos'
 import Register from './components/Register'
+import axios from 'axios'
 //styles
 import './css/bootstrap.min.css'
 import './css/App.css'
-import axios from 'axios'
 //appps
 function App() {
   const [api_key,setApikey] = useState(null)
