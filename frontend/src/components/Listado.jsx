@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Listado( props ) {
-    console.log(props)
     //inicializamos el estado del listado de peliculas
     const [listadoPeliculas ,setListadoPeliculas] = useState([])
     //Navigate para navegar entre rutas

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate  } from 'react-router-dom';
 import Swal from "sweetalert2";
 function Resultados(props) {
-    console.log(props)
     const [resultadoPeliculas , setResultadoPeliculas ] = useState([])
 
     const navigate = useNavigate()
@@ -34,15 +33,14 @@ function Resultados(props) {
                                     icon: 'error',
                                     confirmButtonText: 'Ok'})
                             }
-                        } ) .catch((e)=>{
+                        } ) .catch(()=>{
                             Swal.fire({
                                 title: 'Error!',
                                 text: 'Error de conexion',
                                 icon: 'error',
                                 confirmButtonText: 'Ok'
                             })
-                            console.log(e)
-                
+                            
                         }) 
                                     
                     } catch (error) {

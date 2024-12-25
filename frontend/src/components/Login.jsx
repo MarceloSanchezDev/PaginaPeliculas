@@ -37,7 +37,6 @@ function Login() {
             navigate('/listado')
         })
         .catch((e)=>{
-            console.log(e.data.error)
             swal.fire({
             title: 'Error al Iniciar Sesion',
             text: `${e.response.data.error}`,

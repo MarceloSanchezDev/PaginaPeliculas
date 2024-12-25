@@ -21,12 +21,10 @@ function App() {
   
   async function fechtApiKey() {
     const res = await axios.get('/apikey').then(res => res.data.apikey)
-    console.log(res)
     setApikey(res)
   }
   fechtApiKey()
     useEffect(()=>{
-        console.log(api_key)
         const favsInLocal = localStorage.getItem('favs')
         if(favsInLocal !== null){
             const favsArray = JSON.parse(favsInLocal)
