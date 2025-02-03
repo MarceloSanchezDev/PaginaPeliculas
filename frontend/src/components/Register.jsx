@@ -44,7 +44,7 @@ function Register() {
     }
     //Axios Post para mandar las credenciales a la API
     axios
-      .post("api/index.js/auth/register", { email, password, username })
+      .post("api/auth/register", { email, password, username })
       .then((res) => {
         //lo guardamos en el sessionStorage
         sessionStorage.setItem("token", res.data.token);
