@@ -1,5 +1,4 @@
 import express, {json} from 'express'
-import path from 'path'
 import cors from 'cors'
 import { requestLogger, unknownEndpoint, errorHandler } from './utilsBackend/middleware.js'
 import { authRouter } from './routes/auth.js'

@@ -1,88 +1,110 @@
 //Librerias
-import {Routes, Route} from 'react-router-dom'
-import { useEffect, useState } from "react"
+import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 //Componentes
-import Login from "./components/Login"
-import Listado from './components/Listado'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Detalle from './components/Detalle'
-import Resultados from './components/Resultados'
-import Favoritos from './components/Favoritos'
-import Register from './components/Register'
-import axios from 'axios'
+import Login from "./components/Login";
+import Listado from "./components/Listado";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Detalle from "./components/Detalle";
+import Resultados from "./components/Resultados";
+import Favoritos from "./components/Favoritos";
+import Register from "./components/Register";
+import axios from "axios";
 //styles
-import './css/bootstrap.min.css'
-import './css/App.css'
-import './css/bootstrap.bundle.min.js';
+import "./css/bootstrap.min.css";
+import "./css/App.css";
+import "./css/bootstrap.bundle.min.js";
 //appps
 function App() {
-  const [api_key,setApikey] = useState(null)
-  const [favorites, setFavorites] = useState ([])
-  
+  const [api_key, setApikey] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+
   async function fechtApiKey() {
-    const res = await axios.get('/apikey').then(res => res.data.apikey)
-    setApikey(res)
+    const res = await axios
+      .get("api/index.js/apikey")
+      .then((res) => res.data.apikey);
+    setApikey(res);
   }
-  fechtApiKey()
-    useEffect(()=>{
-        const favsInLocal = localStorage.getItem('favs')
-        if(favsInLocal !== null){
-            const favsArray = JSON.parse(favsInLocal)
-            setFavorites(favsArray)
-        }
-    },[api_key])
-  
-  const favMovies = localStorage.getItem('favs')
+  fechtApiKey();
+  useEffect(() => {
+    const favsInLocal = localStorage.getItem("favs");
+    if (favsInLocal !== null) {
+      const favsArray = JSON.parse(favsInLocal);
+      setFavorites(favsArray);
+    }
+  }, [api_key]);
 
-  let tempMoviesInFavs
+  const favMovies = localStorage.getItem("favs");
 
-  if(favMovies === null){
-    tempMoviesInFavs = []
-  }else{
-    tempMoviesInFavs = JSON.parse(favMovies)
+  let tempMoviesInFavs;
+
+  if (favMovies === null) {
+    tempMoviesInFavs = [];
+  } else {
+    tempMoviesInFavs = JSON.parse(favMovies);
   }
-  const addOrRemoveFromFavs=(e)=>{
-    const btn = e.currentTarget
-    const parent = btn.parentElement
-    const imgUrl = parent.querySelector('img').getAttribute('src')
-    const title = parent.querySelector('h5').innerText
-    const overview = parent.querySelector('p').innerText
+  const addOrRemoveFromFavs = (e) => {
+    const btn = e.currentTarget;
+    const parent = btn.parentElement;
+    const imgUrl = parent.querySelector("img").getAttribute("src");
+    const title = parent.querySelector("h5").innerText;
+    const overview = parent.querySelector("p").innerText;
 
     const movieData = {
-      imgUrl, title, overview,
-      id : btn.dataset.movieId
-    }
+      imgUrl,
+      title,
+      overview,
+      id: btn.dataset.movieId,
+    };
 
-    let moviesIsInTheArray = tempMoviesInFavs.find(m => movieData.id === m.id)
-    if(!moviesIsInTheArray){
-      tempMoviesInFavs.push(movieData)
-      localStorage.setItem('favs', JSON.stringify(tempMoviesInFavs))
-      setFavorites(tempMoviesInFavs)
-    }else{
-      tempMoviesInFavs = tempMoviesInFavs.filter(m => movieData.id !== m.id);
-      localStorage.setItem('favs', JSON.stringify(tempMoviesInFavs));
-      setFavorites(tempMoviesInFavs)
+    let moviesIsInTheArray = tempMoviesInFavs.find(
+      (m) => movieData.id === m.id
+    );
+    if (!moviesIsInTheArray) {
+      tempMoviesInFavs.push(movieData);
+      localStorage.setItem("favs", JSON.stringify(tempMoviesInFavs));
+      setFavorites(tempMoviesInFavs);
+    } else {
+      tempMoviesInFavs = tempMoviesInFavs.filter((m) => movieData.id !== m.id);
+      localStorage.setItem("favs", JSON.stringify(tempMoviesInFavs));
+      setFavorites(tempMoviesInFavs);
     }
-
-  }
+  };
 
   return (
-    <div className='container mt-3'>
-      <Header favoritos = {favorites}/>
-    {/*Routes es lo mismo que Switch */}
+    <div className="container mt-3">
+      <Header favoritos={favorites} />
+      {/*Routes es lo mismo que Switch */}
       <Routes>
-          {/*Route es la ruta donde se renderiza el elemento */}
-          <Route path='/' element={<Login/>}/>
-          <Route path='/registro' element={<Register/>}/>
-          <Route path='/listado' element ={<Listado api_key={api_key} addOrRemoveFromFavs={addOrRemoveFromFavs}/>}/>
-          <Route path='/detalle' element={<Detalle api_key={api_key} />}/>
-          <Route path='/resultados' element={<Resultados api_key={api_key}/>}/>
-          <Route path="/favoritos" element={<Favoritos api_key={api_key} favorites = {favorites}addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />
+        {/*Route es la ruta donde se renderiza el elemento */}
+        <Route path="/" element={<Login />} />
+        <Route path="/registro" element={<Register />} />
+        <Route
+          path="/listado"
+          element={
+            <Listado
+              api_key={api_key}
+              addOrRemoveFromFavs={addOrRemoveFromFavs}
+            />
+          }
+        />
+        <Route path="/detalle" element={<Detalle api_key={api_key} />} />
+        <Route path="/resultados" element={<Resultados api_key={api_key} />} />
+        <Route
+          path="/favoritos"
+          element={
+            <Favoritos
+              api_key={api_key}
+              favorites={favorites}
+              addOrRemoveFromFavs={addOrRemoveFromFavs}
+            />
+          }
+        />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
