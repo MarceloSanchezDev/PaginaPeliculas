@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import crypto from 'node:crypto'
-import { SALT_ROUNDS, DBTOKEN } from '../../utilsBackend/config.js'
+import { DBTOKEN } from '../../utilsBackend/config.js'
 import { info, cError } from '../../utilsBackend/logger.js'
 import { createClient } from '@libsql/client'
 
@@ -15,6 +15,7 @@ await db.execute('CREATE TABLE IF NOT EXISTS USER (id_user varchar(36) primary k
 export class UserModel {
   static async registerUser ({ input }) {
     // extraigo del input los siguientes datos
+    const SALT_ROUNDS = 10
     const {
             username,
             password,
