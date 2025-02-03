@@ -20,18 +20,24 @@ function App() {
   const [api_key, setApikey] = useState(null);
   const [favorites, setFavorites] = useState([]);
 
-  async function fechtApiKey() {
-    const res = await axios.get("/api/apikey").then((res) => res.data.apikey);
-    setApikey(res);
-  }
-  fechtApiKey();
+  useEffect(() => {
+    async function fetchApiKey() {
+      try {
+        const res = await axios.get("/api/apikey");
+        setApikey(res.data.apikey);
+      } catch (error) {
+        console.error("Error obteniendo la API Key:", error);
+      }
+    }
+    fetchApiKey();
+  }, []);
   useEffect(() => {
     const favsInLocal = localStorage.getItem("favs");
     if (favsInLocal !== null) {
       const favsArray = JSON.parse(favsInLocal);
       setFavorites(favsArray);
     }
-  }, [api_key]);
+  }, []);
 
   const favMovies = localStorage.getItem("favs");
 
