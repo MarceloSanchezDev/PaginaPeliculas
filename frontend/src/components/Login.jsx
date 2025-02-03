@@ -21,7 +21,7 @@ function Login() {
     e.preventDefault();
     //Axios Post para mandar las credenciales a la API
     axios
-      .post("api/auth/login", { email, password })
+      .post("/api/auth/login", { email, password })
       .then((res) => {
         //lo guardamos en el sessionStorage
         sessionStorage.setItem("token", res.data.token);
