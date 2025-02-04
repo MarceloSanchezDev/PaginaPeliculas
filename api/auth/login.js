@@ -5,4 +5,3 @@ export const authRouter = Router()
 
 authRouter.post('/login', UserController.login)
 
-authRouter.post('/register', UserController.registerUser)

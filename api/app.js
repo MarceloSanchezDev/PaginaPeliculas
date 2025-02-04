@@ -9,10 +9,10 @@ app.disable('x-powered-by')
 app.use(json())
 app.use(cors())
 app.use(requestLogger)
-app.get('/apikey',(req,res)=>{
+app.get('/api/apikey',(req,res)=>{
     res.json({ apikey: API_KEY })
 })
-app.use('/auth', authRouter)
+app.use('/api/auth', authRouter)
 app.use(unknownEndpoint)
 app.use(errorHandler)
 
